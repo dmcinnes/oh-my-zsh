@@ -1,0 +1,12 @@
+#compdef passwd groups userdel chage chfn chsh
+
+local expl users
+
+if zstyle -a ":completion:${curcontext}:users" users users; then
+    _wanted users expl user compadd "$@" -a - users
+    return 0
+fi
+
+# commented this out based on this:
+# http://www.zsh.org/mla/users/2005/msg00667.html
+# _wanted users expl user compadd "$@" -k - userdirs
