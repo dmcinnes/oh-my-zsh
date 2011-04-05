@@ -10,7 +10,7 @@ parse_git_branch() {
   nobranch_pattern="# Not currently on any branch."
   remote_pattern="# Your branch is ([^ ]*) "
   diverge_pattern="# Your branch and (.*) have diverged"
-  if [[ ! ${git_status} =~ "working directory clean" ]]; then
+  if [[ ! ${git_status} =~ "nothing to commit" ]]; then
     local state="%{$fg[yellow]%}⚡"
   fi
   # add an else if or two here if you want to get more specific
