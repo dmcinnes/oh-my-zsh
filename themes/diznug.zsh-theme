@@ -8,18 +8,18 @@ parse_git_branch() {
   git_status="$(git status 2> /dev/null)"
   branch_pattern="On branch ([[:alnum:]/_-]*)"
   nobranch_pattern="HEAD detached at"
-  remote_pattern="Your branch is ([^ ]*) '"
+  remote_pattern="Your branch is ([^ ]*)"
   diverge_pattern="Your branch and (.*) have diverged"
   if [[ ! ${git_status} =~ "nothing to commit" ]]; then
     local state="%{$fg[yellow]%}⚡︎"
   fi
+
   # add an else if or two here if you want to get more specific
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
-    if [[ ${match[1]} == "ahead" ]]; then
-      remote="%{$fg[yellow]%}↑"
-    else
-      remote="%{$fg[yellow]%}↓"
-    fi
+    case ${match[1]} in
+    "ahead")  remote="%{$fg[yellow]%}↑" ;;
+    "behind") remote="%{$fg[yellow]%}↓" ;;
+    esac
   else
     remote=""
   fi
