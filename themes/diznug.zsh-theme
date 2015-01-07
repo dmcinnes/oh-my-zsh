@@ -11,7 +11,7 @@ parse_git_branch() {
   remote_pattern="Your branch is ([^ ]*)"
   diverge_pattern="Your branch and (.*) have diverged"
   if [[ ! ${git_status} =~ "nothing to commit" ]]; then
-    local state="%{$fg[yellow]%}⚡︎"
+    local state="%{$fg[yellow]%}*"
   fi
 
   # add an else if or two here if you want to get more specific
@@ -38,5 +38,11 @@ parse_git_branch() {
   fi
 }
 
-PROMPT='%{$fg[green]%}%~%{$fg[magenta]%}$(parse_git_branch)%{$reset_color%}%(2L.[%L].)%(?. $. %{$fg[red]%}$%{$reset_color%}) '
+cloud_display() {
+  if [[ ${HEROKU_CLOUD} != 'production' && ${HEROKU_CLOUD} != '' ]]; then
+    echo "%{$fg[blue]%}[%{$fg[cyan]%}${HEROKU_CLOUD:u}%{$fg[blue]%}] "
+  fi
+}
+
+PROMPT='$(cloud_display)%{$fg[green]%}%~%{$fg[magenta]%}$(parse_git_branch)%{$reset_color%}%(2L.[%L].)%(?. $. %{$fg[red]%}$%{$reset_color%}) '
 # RPROMPT=%T
