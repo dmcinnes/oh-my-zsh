@@ -44,5 +44,5 @@ cloud_display() {
   fi
 }
 
-PROMPT='$(cloud_display)%{$fg[green]%}%~%{$fg[magenta]%}$(parse_git_branch)%{$reset_color%}%(2L.[%L].)%(?. $. %{$fg[red]%}$%{$reset_color%}) '
+PROMPT='$(cloud_display)%{$fg[green]%}%~%{$fg[magenta]%}$(parse_git_branch)%{$reset_color%}%(?. $. %{$fg[red]%}$%{$reset_color%}) '
 # RPROMPT=%T
